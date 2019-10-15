@@ -26,4 +26,8 @@
 #sudo apt-get install -y nodejs
 
 sudo apt-get install -y php-memcache
+sudo systemctl restart php5.6-fpm
+sudo systemctl restart php7.2-fpm
+sudo systemctl restart php7.3-fpm
+
 sudo apt install -y mc
