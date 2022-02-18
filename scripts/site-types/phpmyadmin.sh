@@ -1,8 +1,38 @@
 #!/usr/bin/env bash
 
+if [ -f /usr/share/phpmyadmin/config.inc.php ]
+then
+    echo "phpMyAdmin already installed."
+    exit 0
+fi
+
 declare -A params=$6       # Create an associative array
 declare -A headers=${9}    # Create an associative array
 declare -A rewrites=${10}  # Create an associative array
+
+# From https://stackoverflow.com/a/59825964/5155484
+VERSION_INFO="$(curl -sS 'https://www.phpmyadmin.net/home_page/version.txt')"
+LATEST_VERSION="$(echo -e "$VERSION_INFO" | head -n 1)"
+LATEST_VERSION_URL="$(echo -e "$VERSION_INFO" | tail -n 1)"
+# We want the .tar.gz version
+LATEST_VERSION_URL="${LATEST_VERSION_URL/.zip/.tar.gz}"
+
+echo "Downloading phpMyAdmin $LATEST_VERSION ($LATEST_VERSION_URL)"
+curl $LATEST_VERSION_URL -q -# -o 'phpmyadmin.tar.gz'
+
+mkdir "$2" && tar xf phpmyadmin.tar.gz -C "$2" --strip-components 1
+rm phpmyadmin.tar.gz
+
+CONFIG_FILE="$2/config.inc.php"
+
+cp "$2/config.sample.inc.php" $CONFIG_FILE
+
+sed -i "s/blowfish_secret'\] = .*/blowfish_secret'\] = 'eYFROnr9XiDsKs8DKs8hTv9XiDsKs8hiDsKs8h0Fnr9s8hTv9XsKs8h0F8DKs8hTv9XiDsKs8h0F9mvo';/" $CONFIG_FILE
+sed -i "s/'UploadDir'\] = .*/'UploadDir'\] = '\/tmp\/phpmyadmin';/" $CONFIG_FILE
+sed -i "s/'SaveDir'\] = .*/'SaveDir'\] = '\/tmp\/phpmyadmin';/" $CONFIG_FILE
+echo "\$cfg['TempDir'] = '/tmp';" >> $CONFIG_FILE
+
+
 paramsTXT=""
 if [ -n "$6" ]; then
    for element in "${!params[@]}"

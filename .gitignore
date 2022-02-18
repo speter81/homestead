@@ -3,9 +3,7 @@
 phpunit.xml
 /Homestead.yaml
 /Homestead.json
-/after.sh
 /provision-always.sh
-/aliases
 /mysqldump.sql.gz
 /mysql_backup
 /postgres_backup
