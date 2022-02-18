@@ -31,6 +31,8 @@ sudo systemctl restart php7.3-fpm
 
 sudo apt autoremove
 
+sudo update-alternatives --set php /usr/bin/php7.2
+
 if [ -f /etc/netplan/60-custom.yaml ]
 then
     echo "custom network already installed."
