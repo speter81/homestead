@@ -46,6 +46,7 @@ block="server {
     index index.html index.htm index.php;
 
     charset utf-8;
+    client_max_body_size 100M;
 
     $rewritesTXT
 
@@ -67,8 +68,6 @@ block="server {
 
     sendfile off;
 
-    client_max_body_size 100m;
-
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php/php$5-fpm.sock;
@@ -89,8 +88,8 @@ block="server {
         deny all;
     }
 
-    ssl_certificate     /etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /etc/nginx/ssl/$1.key;
+    ssl_certificate     /etc/ssl/certs/$1.crt;
+    ssl_certificate_key /etc/ssl/certs/$1.key;
 }
 "
 

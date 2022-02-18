@@ -1,5 +1,5 @@
 ---
-ip: "192.168.10.10"
+ip: "192.168.56.56"
 memory: 2048
 cpus: 2
 provider: virtualbox
@@ -24,6 +24,12 @@ features:
     - mariadb: false
     - ohmyzsh: false
     - webdriver: false
+
+#services:
+#    - enabled:
+#        - "postgresql@12-main"
+#    - disabled:
+#        - "postgresql@11-main"
 
 # ports:
 #     - send: 50000
