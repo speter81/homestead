@@ -33,6 +33,8 @@ sudo apt autoremove
 
 sudo update-alternatives --set php /usr/bin/php7.2
 
+sudo chown -R vagrant:vagrant /var/lib/php/sessions
+
 if [ -f /etc/netplan/60-custom.yaml ]
 then
     echo "custom network already installed."
