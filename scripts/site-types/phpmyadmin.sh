@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -f /usr/share/phpmyadmin/config.inc.php ]
-then
-    echo "phpMyAdmin already installed."
-    exit 0
-fi
-
 declare -A params=$6       # Create an associative array
 declare -A headers=${9}    # Create an associative array
 declare -A rewrites=${10}  # Create an associative array
