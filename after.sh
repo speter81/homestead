@@ -24,6 +24,8 @@
 
 sudo apt-get install -y php-memcache
 sudo apt install -y php5.6-memcache
+sudo apt install php7.2-mongodb
+sudo apt install php7.3-mongodb
 
 sudo systemctl restart php5.6-fpm
 sudo systemctl restart php7.2-fpm
